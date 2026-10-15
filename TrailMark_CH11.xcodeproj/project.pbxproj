@@ -1,0 +1,564 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 77;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		BC2521DB307AD1C600C49F05 /* TrailMarkCore_CH11 in Frameworks */ = {isa = PBXBuildFile; productRef = BC2521DA307AD1C600C49F05 /* TrailMarkCore_CH11 */; };
+		BC2521DD307AD1DD00C49F05 /* TrailMarkCore_CH11 in Frameworks */ = {isa = PBXBuildFile; productRef = BC2521DC307AD1DD00C49F05 /* TrailMarkCore_CH11 */; };
+		BCD62ECE307ACD4A0037FF20 /* TrailMarkWatch_CH11 Watch App.app in Embed Watch Content */ = {isa = PBXBuildFile; fileRef = BCD62EC4307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App.app */; settings = {ATTRIBUTES = (RemoveHeadersOnCopy, ); }; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		BCD62ECC307ACD4A0037FF20 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = BCD62EAA307ACB4A0037FF20 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = BCD62EC3307ACD470037FF20;
+			remoteInfo = "TrailMarkWatch_CH11 Watch App";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXCopyFilesBuildPhase section */
+		BCD62ED2307ACD4A0037FF20 /* Embed Watch Content */ = {
+			isa = PBXCopyFilesBuildPhase;
+			buildActionMask = 2147483647;
+			dstPath = "$(CONTENTS_FOLDER_PATH)/Watch";
+			dstSubfolderSpec = 16;
+			files = (
+				BCD62ECE307ACD4A0037FF20 /* TrailMarkWatch_CH11 Watch App.app in Embed Watch Content */,
+			);
+			name = "Embed Watch Content";
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXCopyFilesBuildPhase section */
+
+/* Begin PBXFileReference section */
+		BCD62EB2307ACB4A0037FF20 /* TrailMark_CH11.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = TrailMark_CH11.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		BCD62EC4307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "TrailMarkWatch_CH11 Watch App.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFileSystemSynchronizedRootGroup section */
+		BCD62EB4307ACB4A0037FF20 /* TrailMark_CH11 */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = TrailMark_CH11;
+			sourceTree = "<group>";
+		};
+		BCD62EC5307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App */ = {
+			isa = PBXFileSystemSynchronizedRootGroup;
+			path = "TrailMarkWatch_CH11 Watch App";
+			sourceTree = "<group>";
+		};
+/* End PBXFileSystemSynchronizedRootGroup section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		BCD62EAF307ACB4A0037FF20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC2521DB307AD1C600C49F05 /* TrailMarkCore_CH11 in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCD62EC1307ACD470037FF20 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				BC2521DD307AD1DD00C49F05 /* TrailMarkCore_CH11 in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		BC2521D9307AD1C600C49F05 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		BCD62EA9307ACB4A0037FF20 = {
+			isa = PBXGroup;
+			children = (
+				BCD62EB4307ACB4A0037FF20 /* TrailMark_CH11 */,
+				BCD62EC5307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App */,
+				BC2521D9307AD1C600C49F05 /* Frameworks */,
+				BCD62EB3307ACB4A0037FF20 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		BCD62EB3307ACB4A0037FF20 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				BCD62EB2307ACB4A0037FF20 /* TrailMark_CH11.app */,
+				BCD62EC4307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		BCD62EB1307ACB4A0037FF20 /* TrailMark_CH11 */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCD62EBD307ACB4D0037FF20 /* Build configuration list for PBXNativeTarget "TrailMark_CH11" */;
+			buildPhases = (
+				BCD62EAE307ACB4A0037FF20 /* Sources */,
+				BCD62EAF307ACB4A0037FF20 /* Frameworks */,
+				BCD62EB0307ACB4A0037FF20 /* Resources */,
+				BCD62ED2307ACD4A0037FF20 /* Embed Watch Content */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				BCD62ECD307ACD4A0037FF20 /* PBXTargetDependency */,
+			);
+			fileSystemSynchronizedGroups = (
+				BCD62EB4307ACB4A0037FF20 /* TrailMark_CH11 */,
+			);
+			name = TrailMark_CH11;
+			packageProductDependencies = (
+				BC2521DA307AD1C600C49F05 /* TrailMarkCore_CH11 */,
+			);
+			productName = TrailMark_CH11;
+			productReference = BCD62EB2307ACB4A0037FF20 /* TrailMark_CH11.app */;
+			productType = "com.apple.product-type.application";
+		};
+		BCD62EC3307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = BCD62ECF307ACD4A0037FF20 /* Build configuration list for PBXNativeTarget "TrailMarkWatch_CH11 Watch App" */;
+			buildPhases = (
+				BCD62EC0307ACD470037FF20 /* Sources */,
+				BCD62EC1307ACD470037FF20 /* Frameworks */,
+				BCD62EC2307ACD470037FF20 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			fileSystemSynchronizedGroups = (
+				BCD62EC5307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App */,
+			);
+			name = "TrailMarkWatch_CH11 Watch App";
+			packageProductDependencies = (
+				BC2521DC307AD1DD00C49F05 /* TrailMarkCore_CH11 */,
+			);
+			productName = "TrailMarkWatch_CH11 Watch App";
+			productReference = BCD62EC4307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		BCD62EAA307ACB4A0037FF20 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 2630;
+				LastUpgradeCheck = 2630;
+				TargetAttributes = {
+					BCD62EB1307ACB4A0037FF20 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+					BCD62EC3307ACD470037FF20 = {
+						CreatedOnToolsVersion = 26.3;
+					};
+				};
+			};
+			buildConfigurationList = BCD62EAD307ACB4A0037FF20 /* Build configuration list for PBXProject "TrailMark_CH11" */;
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = BCD62EA9307ACB4A0037FF20;
+			minimizedProjectReferenceProxies = 1;
+			packageReferences = (
+				BC2521D8307AD15C00C49F05 /* XCLocalSwiftPackageReference "TrailMarkCore_CH11" */,
+			);
+			preferredProjectObjectVersion = 77;
+			productRefGroup = BCD62EB3307ACB4A0037FF20 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				BCD62EB1307ACB4A0037FF20 /* TrailMark_CH11 */,
+				BCD62EC3307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		BCD62EB0307ACB4A0037FF20 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCD62EC2307ACD470037FF20 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		BCD62EAE307ACB4A0037FF20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		BCD62EC0307ACD470037FF20 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		BCD62ECD307ACD4A0037FF20 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = BCD62EC3307ACD470037FF20 /* TrailMarkWatch_CH11 Watch App */;
+			targetProxy = BCD62ECC307ACD4A0037FF20 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		BCD62EBB307ACB4D0037FF20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				DEVELOPMENT_TEAM = 33PDVR6SVF;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		BCD62EBC307ACB4D0037FF20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				DEVELOPMENT_TEAM = 33PDVR6SVF;
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 26.2;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		BCD62EBE307ACB4D0037FF20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TrailMark_CH11/TrailMark_CH11.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 33PDVR6SVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "TrailMark records short video memos for your field journal.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "TrailMark reads your steps, distance, energy, heart rate and sleep to show your daily activity and recovery.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "TrailMark saves your recorded activities to the Health app as workouts.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TrailMark records the route of your journey and geotags the memos you capture.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMark records voice memos for your field journal.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "TrailMark reads motion data to detect your cadence and activity.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Used to pick a video on the Simulator, which has no camera. (Optional — device-only flow doesn't need it.)";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ramsesg.TrailMark-CH11";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		BCD62EBF307ACB4D0037FF20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = TrailMark_CH11/TrailMark_CH11.entitlements;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 33PDVR6SVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_NSCameraUsageDescription = "TrailMark records short video memos for your field journal.";
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "TrailMark reads your steps, distance, energy, heart rate and sleep to show your daily activity and recovery.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "TrailMark saves your recorded activities to the Health app as workouts.";
+				INFOPLIST_KEY_NSLocationWhenInUseUsageDescription = "TrailMark records the route of your journey and geotags the memos you capture.";
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMark records voice memos for your field journal.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "TrailMark reads motion data to detect your cadence and activity.";
+				INFOPLIST_KEY_NSPhotoLibraryUsageDescription = "Used to pick a video on the Simulator, which has no camera. (Optional — device-only flow doesn't need it.)";
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ramsesg.TrailMark-CH11";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		BCD62ED0307ACD4A0037FF20 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TrailMarkWatch_CH11 Watch App/TrailMarkWatch_CH11 Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 33PDVR6SVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TrailMarkWatch_CH11;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMark records voice memos on your wrist.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "TrailMark reads motion data to detect your cadence and activity.";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ramsesg.TrailMark-CH11";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ramsesg.TrailMark-CH11.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Debug;
+		};
+		BCD62ED1307ACD4A0037FF20 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_ENTITLEMENTS = "TrailMarkWatch_CH11 Watch App/TrailMarkWatch_CH11 Watch App.entitlements";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 33PDVR6SVF;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_CFBundleDisplayName = TrailMarkWatch_CH11;
+				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMark records voice memos on your wrist.";
+				INFOPLIST_KEY_NSMotionUsageDescription = "TrailMark reads motion data to detect your cadence and activity.";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				INFOPLIST_KEY_WKCompanionAppBundleIdentifier = "ramsesg.TrailMark-CH11";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "ramsesg.TrailMark-CH11.watchkitapp";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SDKROOT = watchos;
+				SKIP_INSTALL = YES;
+				STRING_CATALOG_GENERATE_SYMBOLS = YES;
+				SWIFT_APPROACHABLE_CONCURRENCY = YES;
+				SWIFT_DEFAULT_ACTOR_ISOLATION = MainActor;
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_UPCOMING_FEATURE_MEMBER_IMPORT_VISIBILITY = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = 4;
+				WATCHOS_DEPLOYMENT_TARGET = 26.0;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		BCD62EAD307ACB4A0037FF20 /* Build configuration list for PBXProject "TrailMark_CH11" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCD62EBB307ACB4D0037FF20 /* Debug */,
+				BCD62EBC307ACB4D0037FF20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCD62EBD307ACB4D0037FF20 /* Build configuration list for PBXNativeTarget "TrailMark_CH11" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCD62EBE307ACB4D0037FF20 /* Debug */,
+				BCD62EBF307ACB4D0037FF20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		BCD62ECF307ACD4A0037FF20 /* Build configuration list for PBXNativeTarget "TrailMarkWatch_CH11 Watch App" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				BCD62ED0307ACD4A0037FF20 /* Debug */,
+				BCD62ED1307ACD4A0037FF20 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+
+/* Begin XCLocalSwiftPackageReference section */
+		BC2521D8307AD15C00C49F05 /* XCLocalSwiftPackageReference "TrailMarkCore_CH11" */ = {
+			isa = XCLocalSwiftPackageReference;
+			relativePath = TrailMarkCore_CH11;
+		};
+/* End XCLocalSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		BC2521DA307AD1C600C49F05 /* TrailMarkCore_CH11 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC2521D8307AD15C00C49F05 /* XCLocalSwiftPackageReference "TrailMarkCore_CH11" */;
+			productName = TrailMarkCore_CH11;
+		};
+		BC2521DC307AD1DD00C49F05 /* TrailMarkCore_CH11 */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = BC2521D8307AD15C00C49F05 /* XCLocalSwiftPackageReference "TrailMarkCore_CH11" */;
+			productName = TrailMarkCore_CH11;
+		};
+/* End XCSwiftPackageProductDependency section */
+	};
+	rootObject = BCD62EAA307ACB4A0037FF20 /* Project object */;
+}
