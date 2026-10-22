@@ -8,8 +8,7 @@ import TrailMarkCore_CH11
 @Observable
 final class AppModel {
     let health = HealthKitManager()
-
-
+    let media = MediaStore()
+    
     init() {}
 }
-
