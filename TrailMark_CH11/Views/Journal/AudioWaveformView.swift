@@ -9,7 +9,7 @@ struct AudioWaveformView: View {
     
     @State private var width: CGFloat = 0
     
-    private let minimunBarheight: CGFloat = 2
+    private let minimumBarHeight: CGFloat = 2
     private let liveSpread = 4.0
     
     var body: some View {
@@ -47,7 +47,7 @@ struct AudioWaveformView: View {
         
         return samples.enumerated().map { index, sample in
             let amplitude = min(Double(sample) * boost(at: index, playhead: playhead), 1) // amp 0..1
-            let height = max(minimunBarheight, amplitude * size.height)
+            let height = max(minimumBarHeight, amplitude * size.height)
             
             return CGRect(
                 x: CGFloat(index) * slot + (slot - barWidth) / 2,
@@ -70,13 +70,21 @@ struct AudioWaveformView: View {
     
     private func seek(toX x: CGFloat) {
         guard width > 0 else { return }
-        onSeek(min(max(Double(x / width), 0), 1))
+        let fraction = Double(x / width)
+        let clamped = min(max(fraction, 0), 1)
+        onSeek(clamped)
     }
 }
 
 #Preview {
+    let previewSamples: [Float] = (0..<96).map { i in
+        let t = Float(i)
+        let base = abs(sin(t / 7))
+        let scale = 0.35 + t / 140
+        return base * scale
+    }
     AudioWaveformView(
-        sample: (0..<96).map { abs(sin(Float($0) / 7)) * (0.35 + Float($0) / 140) },
+        samples: previewSamples,
         progress: 0.45,
         level: 0.7,
         isPlaying: true,
