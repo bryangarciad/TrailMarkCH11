@@ -19,6 +19,8 @@ public final class HealthKitManager {
 
     private let store = HKHealthStore()
     
+    private var openLiveQueries: [HKQuery] = []
+    
     public init() {
         // We will set the auth state unavailable at construct time if device
         // does not support
@@ -119,13 +121,23 @@ public final class HealthKitManager {
     
     // MARK: - Live Vitals
     public func startLiveHearthUpdate() async {
+        guard authorization == .authorized,
+              openLiveQueries.isEmpty else { return }
         
+        streamHeartRateData()
+        
+        Task {
+            await refreshTodaysSummary()
+        }
     }
     
     public func stopLiveHearthUpdate() async {
-        
+        openLiveQueries.forEach { store.stop($0) }
+        openLiveQueries.removeAll()
     }
     
+    // This func is purely to get the data
+    //
     private func streamHeartRateData() {
         let predicate = HKQuery.predicateForSamples(
             withStart: Calendar.current.startOfDay(for: Date()),
@@ -144,7 +156,7 @@ public final class HealthKitManager {
             let bpm = latest.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
             
             Task { @MainActor in
-                //TODO: Assign live bpm to a observed variable
+                // TODO: Assign live bpm to a observed variable
             }
         }
         
@@ -158,6 +170,8 @@ public final class HealthKitManager {
         query.updateHandler = dataHandler
         
         store.execute(query)
+        
+        openLiveQueries.append(query)
     }
     
 }
