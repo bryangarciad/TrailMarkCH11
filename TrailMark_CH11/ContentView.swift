@@ -1,27 +1,17 @@
-//
-//  ContentView.swift
-//  TrailMark_CH11
-//
-//  Created by Ramses Garcia on 10/10/26.
-//
-
 import SwiftUI
 import TrailMarkCore_CH11
 
 struct ContentView: View {
-    let empty = ActivitySummary()
+    @Environment(AppModel.self) private var model
     
     var body: some View {
-        VStack {
-            Image(systemName: "globe")
-                .imageScale(.large)
-                .foregroundStyle(.tint)
-            Text("Hello, world!")
+        TabView {
+            TodayDashboardView()
+                .tabItem { Label("Today", systemImage: "sun.max.fill") }
         }
-        .padding()
+        .task {
+            await model.health.requestAuth()
+            await model.health.refreshTodaysSummary()
+        }
     }
-}
-
-#Preview {
-    ContentView()
 }

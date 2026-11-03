@@ -92,7 +92,7 @@ public final class HealthKitManager {
             date: startOfDayToday
         )
     }
-    
+
     private func sumQuantity(
         _ type: HKQuantityType,
         unit: HKUnit,
@@ -115,6 +115,49 @@ public final class HealthKitManager {
             
             store.execute(query)
         }
+    }
+    
+    // MARK: - Live Vitals
+    public func startLiveHearthUpdate() async {
+        
+    }
+    
+    public func stopLiveHearthUpdate() async {
+        
+    }
+    
+    private func streamHeartRateData() {
+        let predicate = HKQuery.predicateForSamples(
+            withStart: Calendar.current.startOfDay(for: Date()),
+            end: nil
+        )
+        
+        let dataHandler: @Sendable (
+            HKAnchoredObjectQuery,
+            [HKSample]?,
+            [HKDeletedObject]?,
+            HKQueryAnchor?,
+            Error?
+        ) -> Void = { [weak self] _,samples,_,_,_ in
+            guard let latest = (samples as? [HKQuantitySample])?.last else { return }
+            
+            let bpm = latest.quantity.doubleValue(for: HKUnit.count().unitDivided(by: .minute()))
+            
+            Task { @MainActor in
+                //TODO: Assign live bpm to a observed variable
+            }
+        }
+        
+        let query = HKAnchoredObjectQuery(
+            type: heartRateType,
+            predicate: predicate,
+            anchor: nil,
+            limit: HKObjectQueryNoLimit,
+            resultsHandler: dataHandler
+        )
+        query.updateHandler = dataHandler
+        
+        store.execute(query)
     }
     
 }

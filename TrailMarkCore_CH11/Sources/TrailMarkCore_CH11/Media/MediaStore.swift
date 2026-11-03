@@ -1,100 +1,99 @@
 import Foundation
-import Combine
+import AVFoundation // Tool box to deal with media (audio and video)
+import CoreLocation
 import Observation
-import AVFoundation // Media Tool
 
 @MainActor
 @Observable
 public final class MediaStore {
-    public private(set) var memos: [MediaMemo] = [] // In Memory reference For UI
+    // This observable variable is mostly for the UI to access in order to keep the app responsive
+    public private(set) var memos: [MediaMemo] = []
     
     private let fileManager = FileManager.default
-    private let indexFileName = "memos.json" // index
+    private let indexFileName = "memos.json"
     
     public init() {
-        loadIndex()
+        loadIndexData()
     }
     
+    // MARK: - File Manager Locations
+
+    // We will define a specific location (unmutable)
     public var mediaDirectory: URL {
-        let base = fileManager.urls(for: .applicationSupportDirectory, in: .userDomainMask)[0] // username/.trailmark
-        let dir = base.appendingPathComponent("Media", isDirectory: true)
-        // username/.trailmark/Media/
-        if  !fileManager.fileExists(atPath: dir.path) {
+        let base = fileManager.urls(for: .applicationDirectory, in: .userDomainMask)[0] // ramsesg/home/trailmarkch10
+        let dir = base.appendingPathComponent("Media", isDirectory: true) // ramsesg/home/trailmarkch10/Media
+        
+        if !fileManager.fileExists(atPath: dir.path) {
             try? fileManager.createDirectory(at: dir, withIntermediateDirectories: true)
         }
-
+        
         return dir
     }
     
-    // This is for the index; mediaDir + index
     private var indexURL: URL {
-        mediaDirectory.appendingPathComponent(indexFileName)
+        mediaDirectory.appendingPathComponent(indexFileName) // -> // ramsesg/home/trailmarkch10/memos.json
     }
     
-    // This is for the media memo files; mediaDir + memo file name
     public func url(for memo: MediaMemo) -> URL {
-        mediaDirectory.appendingPathComponent(memo.fileName)
+        mediaDirectory.appendingPathComponent(memo.fileName) // -> ramsesg/home/trailmarkch10/Media/example.m4a
     }
     
-    // MARK: - Saving
+    // MARK: - Saving Functions
     @discardableResult
     public func add(
-        type: MemoType,
+        kind: MemoType,
         movingFileFrom sourceURL: URL,
         duration: TimeInterval,
-        title: String = ""
+        title: String = "",
+        coordinate: CLLocationCoordinate2D? = nil
     ) throws -> MediaMemo {
         let id = UUID()
-        let ext = sourceURL.pathExtension.isEmpty ?
-            (type == .audio ? "m4a" : "mov") :
-            sourceURL.pathExtension
-        
-        let fileName = "\(id.uuidString).\(ext)"
+        let ext = sourceURL.pathExtension.isEmpty ? (kind == .audio ? "m4a" : "mov") : sourceURL.pathExtension
+        let fileName = "\(id.uuidString).\(ext)" // asdhgjashjd-23423-asdasd324-asd3443.m4a
         let destination = mediaDirectory.appendingPathComponent(fileName)
         
-        // This step is going to prevent collisions due to duplicate files
-        // Which is anyways very unlikely due to UUID
+        // sanity check in case file already exists
         if fileManager.fileExists(atPath: destination.path) {
-            try fileManager.removeItem(at: destination)
+            try? fileManager.removeItem(at: destination)
         }
         
-        try fileManager.moveItem(at: sourceURL, to: destination)
-
+        try? fileManager.moveItem(at: sourceURL, to: destination)
+        
         var memo = MediaMemo(
             id: id,
-            type: type,
+            type: kind,
             fileName: fileName,
             duration: duration,
             title: title
         )
         
-        memos.insert(memo, at: 0) // This will ensure the memos to always be sorted descending
-        persistMemoToIndex()
+        memo.setCoordinate(coordinate)
+        
+        memos.insert(memo, at: 0)
+        persistIndex()
         return memo
     }
-    
-    public func delete(_ memo: MediaMemo)    {
-        let fileURL = url(for: memo)
-        try? fileManager.removeItem(at: fileURL) // nil
+
+    /// Adds a memo whose file is already sitting in `mediaDirectory` — e.g. one that
+    /// just arrived from the watch. Re-registering the same ID replaces it.
+    public func register(_ memo: MediaMemo) {
         memos.removeAll { $0.id == memo.id }
-        persistMemoToIndex()
+        memos.append(memo)
+        memos.sort { $0.createdAt > $1.createdAt }
+        persistIndex()
     }
+
     
-    // MARK: - Index Persistance
-    
-    // When you reopen the app we want to reconciliate the in memory
-    // memos arr with the index
-    private func loadIndex() {
+    private func loadIndexData() {
         guard let data = try? Data(contentsOf: indexURL) else { return }
         let decoded = (try? JSONDecoder().decode([MediaMemo].self, from: data)) ?? []
-
-        memos = decoded.sorted { $0.createdAt > $1.createdAt } // This will re add the memos in desc order
+        
+        memos = decoded.sorted { $0.createdAt > $1.createdAt }
     }
     
-    private func persistMemoToIndex() {
+    private func persistIndex() {
         guard let data = try? JSONEncoder().encode(memos) else { return }
         try? data.write(to: indexURL, options: .atomic)
-        
     }
-    
 }
+

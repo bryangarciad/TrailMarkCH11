@@ -9,6 +9,7 @@ import TrailMarkCore_CH11
 final class AppModel {
     let health = HealthKitManager()
     let media = MediaStore()
+    let location = LocationManager()
     
     init() {}
 }

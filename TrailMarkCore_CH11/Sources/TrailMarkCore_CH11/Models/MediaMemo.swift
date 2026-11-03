@@ -1,5 +1,6 @@
 import Foundation
 import Combine
+import CoreLocation
 
 public enum MemoType: String, Codable, Sendable, CaseIterable {
     case audio
@@ -29,13 +30,18 @@ public struct MediaMemo: Identifiable, Hashable, Sendable, Codable {
     public let title: String
     public let createdAt: Date
     
+    public var latitude: Double?
+    public var longitude: Double?
+    
     public init(
         id: UUID = UUID(),
         type: MemoType,
         fileName: String,
         createdAt: Date = Date(),
         duration: TimeInterval = 0,
-        title: String = ""
+        title: String = "",
+        longitude: Double? = nil,
+        latitude: Double? = nil
     ) {
         self.id = id
         self.type = type
@@ -43,6 +49,19 @@ public struct MediaMemo: Identifiable, Hashable, Sendable, Codable {
         self.createdAt = createdAt
         self.duration = duration
         self.title = title
+        self.longitude = longitude
+        self.latitude = latitude
+    }
+    
+    // MARK: - Coordinate Helpers
+    public var coordinate: CLLocationCoordinate2D? {
+        guard let latitude, let longitude else { return nil }
+        return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
+    }
+    
+    public mutating func setCoordinate(_ coordinate: CLLocationCoordinate2D?) {
+        latitude = coordinate?.latitude
+        longitude = coordinate?.longitude
     }
     
     // MARK: - UI Display Helpers

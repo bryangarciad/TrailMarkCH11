@@ -17,10 +17,7 @@ public enum WaveformLoader {
     ///
     /// Returns an empty array if the file can't be decoded — the UI treats that
     /// as "no waveform to draw" rather than an error worth putting on screen.
-    public static func amplitudes(
-        from url: URL,
-        barCount: Int = defaultBarCount
-    ) async -> [Float] {
+    public static func amplitudes(from url: URL, barCount: Int = defaultBarCount) async -> [Float] {
         #if os(watchOS)
         // AVAssetReader doesn't exist on watchOS, so there is no shape to draw
         // there. Callers get the same "no waveform" path as an undecodable file.
