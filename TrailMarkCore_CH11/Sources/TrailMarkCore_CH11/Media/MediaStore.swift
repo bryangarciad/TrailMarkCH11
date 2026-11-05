@@ -41,7 +41,7 @@ public final class MediaStore {
     // MARK: - Saving Functions
     @discardableResult
     public func add(
-        kind: MemoType,
+        kind: MemoKind,
         movingFileFrom sourceURL: URL,
         duration: TimeInterval,
         title: String = "",
@@ -61,7 +61,7 @@ public final class MediaStore {
         
         var memo = MediaMemo(
             id: id,
-            type: kind,
+            kind: kind,
             fileName: fileName,
             duration: duration,
             title: title
@@ -96,4 +96,3 @@ public final class MediaStore {
         try? data.write(to: indexURL, options: .atomic)
     }
 }
-

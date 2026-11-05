@@ -94,4 +94,3 @@ struct MemoRow: View {
         }
     }
 }
-

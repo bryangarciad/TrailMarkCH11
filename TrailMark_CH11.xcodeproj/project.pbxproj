@@ -447,7 +447,10 @@
 				DEVELOPMENT_TEAM = 33PDVR6SVF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrailMarkWatch_CH11-Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TrailMarkWatch_CH11;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "TrailMark reads your heart rate, steps and energy on your wrist.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "TrailMark saves your workouts to the Health app.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMark records voice memos on your wrist.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "TrailMark reads motion data to detect your cadence and activity.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
@@ -483,7 +486,10 @@
 				DEVELOPMENT_TEAM = 33PDVR6SVF;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = TrailMarkWatch_CH11-Info.plist;
 				INFOPLIST_KEY_CFBundleDisplayName = TrailMarkWatch_CH11;
+				INFOPLIST_KEY_NSHealthShareUsageDescription = "TrailMark reads your heart rate, steps and energy on your wrist.";
+				INFOPLIST_KEY_NSHealthUpdateUsageDescription = "TrailMark saves your workouts to the Health app.";
 				INFOPLIST_KEY_NSMicrophoneUsageDescription = "TrailMark records voice memos on your wrist.";
 				INFOPLIST_KEY_NSMotionUsageDescription = "TrailMark reads motion data to detect your cadence and activity.";
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";

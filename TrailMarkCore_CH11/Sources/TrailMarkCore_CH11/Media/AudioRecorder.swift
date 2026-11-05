@@ -64,4 +64,3 @@ public final class AudioRecorder {
         try session.setActive(true)
     }
 }
-

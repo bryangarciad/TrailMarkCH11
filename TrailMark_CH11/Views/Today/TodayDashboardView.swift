@@ -3,11 +3,11 @@ import TrailMarkCore_CH11
 
 struct TodayDashboardView: View {
     @Environment(AppModel.self) private var model
-
+    
     var body: some View {
         NavigationStack {
             Group {
-                switch model.health.authorization {
+                switch model.health.currentAuthStatus {
                 case .unavailable:
                     ContentUnavailableView(
                         "Health data unavailable",
@@ -22,7 +22,7 @@ struct TodayDashboardView: View {
                     } actions: {
                         Button("Try again") {
                             Task {
-                                await model.health.requestAuth()
+                                await model.health.requestAuthorization()
                                 await model.health.refreshTodaysSummary()
                             }
                         }
@@ -42,19 +42,19 @@ struct TodayDashboardView: View {
             VStack(spacing: 16) {
                 MetricCard(
                     title: "Steps",
-                    value: model.health.todaySummary.stepsText,
+                    value: model.health.todaysSummary.stepsText,
                     symbol: "figure.walk",
                     tint: .orange
                 )
                 MetricCard(
                     title: "Distance",
-                    value: model.health.todaySummary.distanceText,
-                    symbol: "point.topleft.down.curvedto.point.bottomright.up",
+                    value: model.health.todaysSummary.distanceText,
+                    symbol: "figure.walk",
                     tint: .teal
                 )
                 MetricCard(
                     title: "Active Energy",
-                    value: model.health.todaySummary.activeEnergyText,
+                    value: model.health.todaysSummary.activeEnergyText,
                     symbol: "flame.fill",
                     tint: .red
                 )

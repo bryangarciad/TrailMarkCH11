@@ -12,7 +12,7 @@ struct JourneyDetailsView: View {
             VStack(alignment: .leading, spacing: 20) {
                 map
                 stats
-                //if let workout = journey.workout { workoutSection(workout) }
+                if let workout = journey.workout { workoutSection(workout) }
                 memoSection
             }
             .padding()
@@ -116,4 +116,3 @@ struct JourneyDetailsView: View {
         }
     }
 }
-

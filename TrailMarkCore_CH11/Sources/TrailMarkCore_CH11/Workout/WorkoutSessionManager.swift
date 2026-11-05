@@ -1,4 +1,3 @@
-// a Macro starts always with #, and is an instruction to XCode not swift
 #if os(watchOS)
 import Foundation
 import HealthKit
@@ -7,113 +6,92 @@ import Observation
 @MainActor
 @Observable
 public final class WorkoutSessionManager: NSObject {
-    public private(set) var isWorkoutRunning: Bool = false
-    
-    // For a Hike type of workout the health data that is relevant
-    // is the heart rate, energy consumed, and distance
-    //
+
+    // This flag is to communicate the UI that there is a workout in progress
+    public private(set) var isRunning: Bool = false
+
     public private(set) var heartRate: Double = 0.0
     public private(set) var activeEnergy: Double = 0.0
     public private(set) var distanceMeters: Double = 0.0
     public private(set) var startDate: Date?
-    
+
+    /// The phone journey this workout belongs to, when it was started by "Start Journey".
     public private(set) var journeyID: UUID?
-    
+
+    // Callback function that will be executed once the workout is completed by the user
     public var onFinish: ((WorkoutRecord) -> Void)?
-    
-    public let store = HKHealthStore()
-    // This is the obj that represents the workout session
-    public var session: HKWorkoutSession?
-    // This is the interface that allows us to build a workout
-    public var builder: HKLiveWorkoutBuilder?
-    
-    
-    private let bpmUnit = HKUnit.count().unitDivided(by: .minute())
-    
+
+    // Order in which you start these component is important
+    private let store = HKHealthStore()
+    private var session: HKWorkoutSession?
+    private var builder: HKLiveWorkoutBuilder?
+
     public override init() { super.init() }
-    
+
     public var elapsed: TimeInterval {
         guard let startDate else { return 0 }
-        return Date().timeIntervalSince(startDate)
+        return Date().timeIntervalSince(startDate) // return number of seconds betwen startDate and Current Date
     }
-    
-    // MARK: - Auth
+
+    // MARK: - Authorization
+
+    /// Workouts need their own types on top of HealthKitManager's: heart rate to read
+    /// live, and the workout itself to save.
     public func requestAuthorization() async {
         guard HKHealthStore.isHealthDataAvailable() else { return }
-            
-        var energyType: HKQuantityType = HKQuantityType(.activeEnergyBurned)
-        var distanceType: HKQuantityType = HKQuantityType(.distanceWalkingRunning)
-        var heartRateType: HKQuantityType = HKQuantityType(.heartRate)
-        
+        let energy = HKQuantityType(.activeEnergyBurned)
+        let distance = HKQuantityType(.distanceWalkingRunning)
         try? await store.requestAuthorization(
-            toShare: [HKObjectType.workoutType(), energyType, distanceType],
-            read: [heartRateType, energyType, distanceType]
+            toShare: [HKObjectType.workoutType(), energy, distance],
+            read: [HKQuantityType(.heartRate), energy, distance]
         )
     }
-    
-    
-    public func reset() {
-        isWorkoutRunning = false
-        journeyID = nil
-        session = nil
-        builder = nil
-    }
-    
-    // MARK: - Start Workout
-    
+
+    // MARK: - LifeCycle Control Functions
+
+    /// Starts a walking workout. Safe to call twice: the phone's "Start Journey" both
+    /// launches the app with a workout configuration AND sends a start command, and
+    /// whichever arrives second just attaches the journey ID.
     public func start(journeyID: UUID? = nil) {
-        if let journeyID, self.journeyID == nil {
-            self.journeyID = journeyID
-        }
-        
+        if let journeyID, self.journeyID == nil { self.journeyID = journeyID }
         guard session == nil else { return }
-        
+
         let configuration = HKWorkoutConfiguration()
-        configuration.activityType = .hiking
+        configuration.activityType = .walking
         configuration.locationType = .outdoor
-        
+
         do {
-            let session = try HKWorkoutSession(
-                healthStore: store,
-                configuration: configuration
-            )
+            let session = try HKWorkoutSession(healthStore: store, configuration: configuration)
             let builder = session.associatedWorkoutBuilder()
-            
-            builder.dataSource = HKLiveWorkoutDataSource(
-                healthStore: store,
-                workoutConfiguration: configuration
-            )
-            
+            builder.dataSource = HKLiveWorkoutDataSource(healthStore: store, workoutConfiguration: configuration) // Getting data straigh from sensors
+
             session.delegate = self
             builder.delegate = self
-            
+
             self.session = session
             self.builder = builder
-            
+
             let now = Date()
-            
             startDate = now
             heartRate = 0
             activeEnergy = 0
             distanceMeters = 0
-            
+
             session.startActivity(with: now)
             builder.beginCollection(withStart: now) { [weak self] success, _ in
                 Task { @MainActor in
                     if success {
-                        self?.isWorkoutRunning = true
+                        self?.isRunning = true
                     } else {
                         self?.reset()
                     }
                 }
             }
-        } catch {
+        }
+        catch {
             reset()
         }
     }
-    
-
-    // MARK: - Stop Session and Workout
 
     public func end() {
         guard let session, let builder else { return }
@@ -123,77 +101,93 @@ public final class WorkoutSessionManager: NSObject {
             Task { @MainActor in self?.finishWorkout(end: endDate) }
         }
     }
-    
+
+    /// Saves the HKWorkout to Health. Hopping back to the MainActor first keeps the
+    /// (non-Sendable) builder from being captured by HealthKit's background callback.
     private func finishWorkout(end: Date) {
         builder?.finishWorkout { [weak self] _, _ in
             Task { @MainActor in self?.finalize(end: end) }
         }
     }
-    
+
     private func finalize(end: Date) {
-        let avgBPM = builder?.statistics(
-            for: HKQuantityType(.heartRate)
-        )?.averageQuantity()?.doubleValue(for: bpmUnit)
-        
+        let bpmUnit = HKUnit.count().unitDivided(by: .minute())
+        let averageBPM = builder?.statistics(for: HKQuantityType(.heartRate))?
+            .averageQuantity()?.doubleValue(for: bpmUnit)
+
         let record = WorkoutRecord(
             start: startDate ?? end,
             end: end,
             activeEnergyKcal: activeEnergy,
-            distanceMeters:  distanceMeters,
-            avgHeartRate:  avgBPM ?? (heartRate > 0 ? heartRate : nil)
+            distanceMeters: distanceMeters,
+            averageHeartRate: averageBPM ?? (heartRate > 0 ? heartRate : nil),
+            journeyID: journeyID
         )
         reset()
         onFinish?(record)
     }
-    
+
+    private func reset() {
+        isRunning = false
+        journeyID = nil
+        session = nil
+        builder = nil
+    }
 }
 
-
-// MARK: - Session And Workout Builder Delegate
+// MARK: - Session Delegator (listen for all session events)
 extension WorkoutSessionManager: HKWorkoutSessionDelegate {
     nonisolated public func workoutSession(
-        _ workoutSession: HKWorkoutSession,
+        _ session: HKWorkoutSession,
+        didFailWithError error: Error
+    ) {
+        Task { @MainActor in self.reset() }
+    }
+
+    nonisolated public func workoutSession(
+        _ session: HKWorkoutSession,
         didChangeTo toState: HKWorkoutSessionState,
         from fromState: HKWorkoutSessionState,
         date: Date
     ) {
         Task { @MainActor in
-            self.isWorkoutRunning = toState == .running // true when new stae is running
+            self.isRunning = toState == .running
         }
-    }
-
-    nonisolated public func workoutSession(
-        _ workoutSession: HKWorkoutSession,
-        didFailWithError error: any Error
-    ) {
-        Task { @MainActor in self.reset() }
     }
 }
 
+// MARK: - Builder Delegator (lister for all builder envents)
 extension WorkoutSessionManager: HKLiveWorkoutBuilderDelegate {
-    nonisolated public func workoutBuilder(_ workoutBuilder: HKLiveWorkoutBuilder, didCollectDataOf collectedTypes: Set<HKSampleType>) {
+    nonisolated public func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) { }
+
+    nonisolated public func workoutBuilder(
+        _ workoutBuilder: HKLiveWorkoutBuilder,
+        didCollectDataOf collectedTypes: Set<HKSampleType>
+    ) {
         for type in collectedTypes {
-            // This guard is checking the current type is quantity and contains statistcis
+            // This guard acts as a filter so we just collect quantityTypes that also have statistics on them
             guard let quantityType = type as? HKQuantityType,
                   let statistics = workoutBuilder.statistics(for: quantityType) else { continue }
-            
+
             switch quantityType {
             case HKQuantityType(.heartRate):
-                let bpm = statistics.mostRecentQuantity()?.doubleValue(for: bpmUnit) ?? 0.0
+                let unit = HKUnit.count().unitDivided(by: .minute())
+                let bpm = statistics.mostRecentQuantity()?.doubleValue(for: unit) ?? 0.0
                 Task { @MainActor in self.heartRate = bpm }
+
             case HKQuantityType(.activeEnergyBurned):
                 let kcal = statistics.sumQuantity()?.doubleValue(for: .kilocalorie()) ?? 0.0
                 Task { @MainActor in self.activeEnergy = kcal }
+
             case HKQuantityType(.distanceWalkingRunning):
                 let distance = statistics.sumQuantity()?.doubleValue(for: .meter()) ?? 0.0
                 Task { @MainActor in self.distanceMeters = distance }
+
             default:
                 break
             }
         }
-        
     }
-
-    nonisolated public func workoutBuilderDidCollectEvent(_ workoutBuilder: HKLiveWorkoutBuilder) {}
 }
+
 #endif

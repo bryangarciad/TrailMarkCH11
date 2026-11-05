@@ -9,7 +9,7 @@ public struct Journey: Identifiable, Hashable, Sendable, Codable {
     public var track: RouteTrack
     public var memoIDs: [UUID]
     
-    // public var workout: WorkoutRecord?
+    public var workout: WorkoutRecord?
     
     public init(
         id: UUID = UUID(),
@@ -17,8 +17,8 @@ public struct Journey: Identifiable, Hashable, Sendable, Codable {
         startedAt: Date = Date(),
         endedAt: Date? = nil,
         track: RouteTrack = RouteTrack(),
-        memoIDs: [UUID] = []
-        // workout: WorkoutRecord? = nil
+        memoIDs: [UUID] = [],
+        workout: WorkoutRecord? = nil
     ) {
         self.id = id
         self.title = title
@@ -26,7 +26,7 @@ public struct Journey: Identifiable, Hashable, Sendable, Codable {
         self.endedAt = endedAt
         self.track = track
         self.memoIDs = memoIDs
-        // self.workout = workout
+        self.workout = workout
     }
     
     // MARK: - UI Helpers
@@ -40,8 +40,6 @@ public struct Journey: Identifiable, Hashable, Sendable, Codable {
     }
     
     public var distanceMeters: Double {
-        //workout?.distanceMeters ?? track.distanceMeters
-        return track.distanceMeters
+        workout?.distanceMeters ?? track.distanceMeters
     }
 }
-

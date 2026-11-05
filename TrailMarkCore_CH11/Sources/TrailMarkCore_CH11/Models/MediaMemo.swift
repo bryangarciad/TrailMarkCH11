@@ -2,40 +2,41 @@ import Foundation
 import Combine
 import CoreLocation
 
-public enum MemoType: String, Codable, Sendable, CaseIterable {
+
+public enum MemoKind: String, Codable, Sendable, CaseIterable {
     case audio
     case video
     
-    // MARK: - UI Helpers
     public var symbolName: String {
         switch self {
-        case .audio: "waveform"
-        case .video: "video.fill"
+        case .audio: return "waveform"
+        case .video: return "video.fill"
         }
     }
     
     public var displayName: String {
         switch self {
-        case .audio: "Voice Memo"
-        case .video: "Video Memo"
+        case .audio: return "Voice Memo"
+        case .video: return "Video Memo"
         }
     }
 }
 
+
 public struct MediaMemo: Identifiable, Hashable, Sendable, Codable {
     public let id: UUID
-    public let type: MemoType
-    public let duration: TimeInterval // Date 3:20 -- 03:20
+    public let kind: MemoKind
     public let fileName: String
-    public let title: String
     public let createdAt: Date
+    public let duration: TimeInterval
+    public let title: String
     
     public var latitude: Double?
     public var longitude: Double?
     
     public init(
         id: UUID = UUID(),
-        type: MemoType,
+        kind: MemoKind,
         fileName: String,
         createdAt: Date = Date(),
         duration: TimeInterval = 0,
@@ -44,7 +45,7 @@ public struct MediaMemo: Identifiable, Hashable, Sendable, Codable {
         latitude: Double? = nil
     ) {
         self.id = id
-        self.type = type
+        self.kind = kind
         self.fileName = fileName
         self.createdAt = createdAt
         self.duration = duration
@@ -53,7 +54,6 @@ public struct MediaMemo: Identifiable, Hashable, Sendable, Codable {
         self.latitude = latitude
     }
     
-    // MARK: - Coordinate Helpers
     public var coordinate: CLLocationCoordinate2D? {
         guard let latitude, let longitude else { return nil }
         return CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
@@ -65,11 +65,19 @@ public struct MediaMemo: Identifiable, Hashable, Sendable, Codable {
     }
     
     // MARK: - UI Display Helpers
-
+    
     public var durationText: String {
         let formatter = DateComponentsFormatter()
-        formatter.allowedUnits = [.minute, .second]
-        formatter.zeroFormattingBehavior = .pad
-        return formatter.string(for: duration) ?? "00:00"
+        formatter.allowedUnits = [.minute, .second] // 00:00
+        formatter.zeroFormattingBehavior = .pad // 01:30
+        return formatter.string(from: duration) ?? "00:00"
+    }
+    
+    private static func defaultTitle(for kind: MemoKind, at date: Date) -> String {
+        let df = DateFormatter()
+        df.dateStyle = .medium
+        df.timeStyle = .short
+        return "\(kind.displayName) - \(df.string(from: date))" // Voice Memo - 09/10
     }
 }
+

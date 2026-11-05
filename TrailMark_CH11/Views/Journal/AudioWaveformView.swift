@@ -2,7 +2,7 @@
 //  AudioWaveformView.swift
 //  TrailMark (iOS)
 //
-//  Draws the amplitudes TrailMarkCH10Core.WaveformLoader decoded off an audio
+//  Draws the amplitudes TrailMarkCore_CH11.WaveformLoader decoded off an audio
 //  file, tinting the part that has already played and scrubbing on drag.
 //
 
@@ -105,4 +105,3 @@ struct AudioWaveformView: View {
     .frame(height: 88)
     .padding()
 }
-

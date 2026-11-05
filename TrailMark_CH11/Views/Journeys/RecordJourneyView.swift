@@ -61,7 +61,7 @@ struct RecordJourneyView: View {
                     Button("Cancel") {
                         if model.location.isLocationBeingRecorded {
                             _ = model.location.stopRecordingRoute()
-                            //model.endWorkout(for: journeyID)
+                            model.endWorkout(for: journeyID)
                         }
                         dismiss()
                     }
@@ -79,7 +79,7 @@ struct RecordJourneyView: View {
     private func start() {
         startedAt = Date()
         model.location.startRecordingRoute()
-        // model.startWorkout(for: journeyID)
+        model.startWorkout(for: journeyID)
     }
     
     private func stop() {
@@ -109,5 +109,4 @@ struct RecordJourneyView: View {
     }
 
 }
-
 

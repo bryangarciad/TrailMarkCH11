@@ -1,4 +1,4 @@
-import  Foundation
+import Foundation
 import CoreLocation
 
 public struct TrackPoint: Hashable, Sendable, Codable, Identifiable {
@@ -25,12 +25,12 @@ public struct TrackPoint: Hashable, Sendable, Codable, Identifiable {
     public init(location: CLLocation) {
         self.init(
             latitude: location.coordinate.latitude,
-            longitude: location.coordinate.latitude,
+            longitude: location.coordinate.longitude,
             altitude: location.altitude,
             timestamp: location.timestamp
         )
     }
-        
+    
     public var coordinate: CLLocationCoordinate2D {
         CLLocationCoordinate2D(latitude: latitude, longitude: longitude)
     }
@@ -42,8 +42,6 @@ public struct RouteTrack: Hashable, Sendable, Codable {
     public init(points: [TrackPoint] = []) {
         self.points = points
     }
-    
-    // MARK: - Computed
     
     public var coordinates: [CLLocationCoordinate2D] {
         points.map(\.coordinate)

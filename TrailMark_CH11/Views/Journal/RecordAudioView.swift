@@ -85,4 +85,3 @@ struct RecordAudioView: View {
         return String(format: "%02d:%02d", minutes, seconds) // 00:00
     }
 }
-

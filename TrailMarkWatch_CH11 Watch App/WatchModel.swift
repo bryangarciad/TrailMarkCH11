@@ -2,10 +2,48 @@ import Foundation
 import Observation
 import TrailMarkCore_CH11
 
+// Owns the shared TrailMarkCore_CH11 managers on the wrist. The watch REUSES the same
+// managers as the phone, including the same ConnectivityManager.
 @MainActor
 @Observable
 final class WatchModel {
     let health = HealthKitManager()
-    
-    init() {}
+    let media = MediaStore()
+    let motion = MotionManager()
+    let workout = WorkoutSessionManager()
+    let connectivity = ConnectivityManager.shared
+
+    init() {
+        // A finished workout (started here or from the phone) goes back as a record.
+        workout.onFinish = { [weak self] record in
+            self?.syncFinished(workout: record)
+        }
+        // "Start Journey" / "Stop & Save" on the phone drive the workout on the wrist.
+        connectivity.onReceiveWorkoutControl = { [weak self] control in
+            switch control.command {
+            case .start: self?.workout.start(journeyID: control.journeyID)
+            case .end: self?.workout.end()
+            }
+        }
+        connectivity.activate()
+    }
+
+    /// Saves a just-recorded memo locally, then transfers the file to the phone so it
+    /// shows up in the iOS journal ("pocket sync").
+    func saveAndSync(memoFrom url: URL, duration: TimeInterval) {
+        guard let memo = try? media.add(kind: .audio, movingFileFrom: url, duration: duration) else { return }
+        connectivity.transfer(memo: memo, fileURL: media.url(for: memo))
+    }
+
+    /// Retries a memo whose transfer failed. Same memo ID and file name, so the phone
+    /// replaces its copy instead of adding a duplicate.
+    func resend(_ memo: MediaMemo) {
+        connectivity.transfer(memo: memo, fileURL: media.url(for: memo))
+    }
+
+    /// Sends a finished activity to the phone as a queued record, so it arrives even
+    /// if the phone is asleep in a pocket.
+    func syncFinished(workout record: WorkoutRecord) {
+        connectivity.sync(workout: record)
+    }
 }
